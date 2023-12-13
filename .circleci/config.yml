@@ -14,7 +14,7 @@ jobs:
           keys:
             - app-{{ checksum "package.json" }}
             - app-
-      -run:
+      - run:
         name: Install Dependencies
         command: npm install
       - save_cache:
@@ -24,7 +24,7 @@ jobs:
 
   deploy-to-aws-s3:
     docker:
-      -image: circleci/node:latest
+      - image: circleci/node:latest
       working_directory: ~/repo
       steps:
       - checkout
@@ -68,8 +68,8 @@ jobs:
       steps:
       - checkout
       - run:
-        name: Show Current Branch
-        command: echo ${CURRENT_BRANCH}
+          name: Show Current Branch
+          command: echo ${CURRENT_BRANCH}
       - run:
           name: Installing AWS CLI
           working_directory: /
@@ -78,14 +78,14 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python-pip python-dev build-essential
       - run:
-        name: Build Project
-        command: |
-          npm install
-          npm run build
-          cd build
-          zip ../build.zip -r * .[^.]*
-          ls -al     
-          echo "Build successful"
+          name: Build Project
+          command: |
+            npm install
+            npm run build
+            cd build
+            zip ../build.zip -r * .[^.]*
+            ls -al     
+            echo "Build successful"
       - run:
           name: Deploy to AWS Cloudfront
           command: |
@@ -101,6 +101,7 @@ jobs:
             else
               aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
             fi
+            
 workflows:
   build_and_deploy:
     jobs:
