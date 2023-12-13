@@ -60,7 +60,7 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *install-aws-cli
-      - *build-project"
+      - *build-project
       - run:
           name: Deploy to AWS S3
           command: |
