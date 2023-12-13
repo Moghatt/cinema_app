@@ -54,12 +54,12 @@ jobs:
             # echo $AWS_BUCKET_NAME
             if [ "${CIRCLE_BRANCH}" == "main" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_PRODUCTION_BUCKET} --delete
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_STAGING_BUCKET} --delete
             else
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_DEV_BUCKET} --delete
             fi
 
   deploy-to-aws-cloudfront:
@@ -70,7 +70,7 @@ jobs:
       - checkout
       - run:
           name: Show Current Branch
-          command: echo ${CURRENT_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
       - run:
           name: Installing AWS CLI
           working_directory: /
