@@ -115,7 +115,7 @@ workflows:
       - build
       - linting:
           requires:
-            -build
+            - build
           filters:
             branches:
               only:
