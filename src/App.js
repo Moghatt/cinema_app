@@ -4,7 +4,7 @@ import Header from './components/header/Header';
 function App() {
   return (
     <div className="app">
-      <Header/>
+      <Header />
       <h1>Setup React Redux</h1>
     </div>
   );
