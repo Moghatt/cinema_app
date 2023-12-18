@@ -70,6 +70,7 @@ jobs:
           name: Run eslint
           command: npm run lint
   prettier:
+    resource_class: medium+
     executor: app-executor
     steps:
       - checkout
