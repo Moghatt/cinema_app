@@ -1,12 +1,15 @@
 import './App.scss';
 import Header from './components/header/Header';
+import Main from './components/main/Main';
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <h1>Setup React Redux</h1>
-    </div>
+    <>
+    <Header/>
+      <div className="app">
+        <Main/>
+      </div>
+    </>
   );
 }
 
